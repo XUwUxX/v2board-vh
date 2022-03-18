@@ -28,7 +28,9 @@ Telegram Channel: [@mortarvpn](https://t.me/mortarvpn)
 
 ## Luật
 1.Chúng tôi đã đóng vấn đề. Nếu bạn muốn tìm chúng tôi, vui lòng liên hệ với chúng tôi thông qua nhóm telegram. 
+
 2.Chuyển tiếp, Vui lòng cho biết repo ban đầu. 
+
 3.Repo này là v2board api interface nguồn mở. Do vấn đề bản quyền, chúng tôi không có kế hoạch mở nguồn front-end, nhưng mã front-end vẫn có thể đọc được.
 
 # V2board full Việt Hóa | Mọi thắc mắc liên hệ Telegram : @lisa_is_me
