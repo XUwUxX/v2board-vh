@@ -8,17 +8,17 @@
 - Redis
 - Laravel
 
-## Link chính chủ
+## Link cài đặt ^^
 ```
 git cgit clone https://github.com/XUwUxX/v2board-vh.git ./
 ```
 ## Demo
 [Link Demo](https://v2board.com)
 
-## Hướng dẫn cài đặt
+## Hướng dẫn cài đặt ><
 [Link HD](https://pn-lisa.gitbook.io/v2board-vh-hd/)
 
-## Donation
+## Donation :33
 - Donate gửi qua Telegram nha :@lisa_is_me
 
 
