@@ -22,7 +22,7 @@ class V2boardInstall extends Command
      *
      * @var string
      */
-    protected $description = 'v2board 安装';
+    protected $description = 'Cài đặt V2board';
 
     /**
      * Create a new command instance.
@@ -47,6 +47,8 @@ class V2boardInstall extends Command
             $this->info(" \ \ / /  __) |  _ \ / _ \ / _` | '__/ _` | ");
             $this->info("  \ V /  / __/| |_) | (_) | (_| | | | (_| | ");
             $this->info("   \_/  |_____|____/ \___/ \__,_|_|  \__,_| ");
+            $this->info(" Việt hóa bởi @Lisa_is_me");
+            $this->info("Link :https://pn-lisa.gitbook.io/v2board-vh-hd/");
             if (\File::exists(base_path() . '/.env')) {
                 abort(500, 'V2board đã được cài đặt, để cài đặt lại, loại bỏ các tập tin.env trong thư mục');
             }
@@ -57,9 +59,9 @@ class V2boardInstall extends Command
             $this->saveToEnv([
                 'APP_KEY' => 'base64:' . base64_encode(Encrypter::generateKey('AES-256-CBC')),
                 'DB_HOST' => $this->ask('Vui lòng nhập địa chỉ cơ sở dữ liệu (mặc định: localhost)', 'localhost'),
-                'DB_DATABASE' => $this->ask('Vui lòng nhập tên Database'),
-                'DB_USERNAME' => $this->ask('Vui lòng nhập tên Username'),
-                'DB_PASSWORD' => $this->ask('Vui lòng nhập tên Password')
+                'DB_DATABASE' => $this->ask('Vui lòng nhập Database'),
+                'DB_USERNAME' => $this->ask('Vui lòng nhập Username'),
+                'DB_PASSWORD' => $this->ask('Vui lòng nhập Password')
             ]);
             \Artisan::call('config:clear');
             \Artisan::call('config:cache');
