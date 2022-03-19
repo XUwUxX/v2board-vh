@@ -38,6 +38,18 @@ This project is no copyright and register ®️ ©️
 ## Cộng đồng
 🚦Telegram Channel: [@mortarvpn](https://t.me/mortarvpn)  
 
+## Lưu Ý
+>✨Bản VH vẫn là demo nên chưa hoàn chỉnh
+>
+> 💮Bản quyền Việt Hóa thuộc về @lisa_is_me ®️
+>
+> 🚫No copyright for undermission
+>
+> 🚫This project is mod from V2board original
+>
+>#v2boardvh #lisaisme #regiter #fyp
+
+
 ## Luật lệ
 1.Chúng tôi đã đóng vấn đề. Nếu bạn muốn tìm chúng tôi, vui lòng liên hệ với chúng tôi thông qua nhóm telegram. 
 
