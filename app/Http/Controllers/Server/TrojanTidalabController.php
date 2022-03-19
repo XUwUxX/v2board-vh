@@ -92,7 +92,7 @@ class TrojanTidalabController extends Controller
         $nodeId = $request->input('node_id');
         $localPort = $request->input('local_port');
         if (empty($nodeId) || empty($localPort)) {
-            abort(500, '参数错误');
+            abort(500, 'Lỗi tham số ');
         }
         $serverService = new ServerService();
         try {
