@@ -129,17 +129,17 @@ class ConfigController extends Controller
                     'stripe_webhook_key' => config('v2board.stripe_webhook_key'),
                     'stripe_currency' => config('v2board.stripe_currency', 'hkd'),
                     // bitpayx
-                    'bitpayx_name' => config('v2board.bitpayx_name', '在线支付'),
+                    'bitpayx_name' => config('v2board.bitpayx_name', 'Thanh toán trực tuyến '),
                     'bitpayx_enable' => (int)config('v2board.bitpayx_enable', 0),
                     'bitpayx_appsecret' => config('v2board.bitpayx_appsecret'),
                     // mGate
-                    'mgate_name' => config('v2board.mgate_name', '在线支付'),
+                    'mgate_name' => config('v2board.mgate_name', 'Thanh toán trực tuyến '),
                     'mgate_enable' => (int)config('v2board.mgate_enable', 0),
                     'mgate_url' => config('v2board.mgate_url'),
                     'mgate_app_id' => config('v2board.mgate_app_id'),
                     'mgate_app_secret' => config('v2board.mgate_app_secret'),
                     // Epay
-                    'epay_name' => config('v2board.epay_name', '在线支付'),
+                    'epay_name' => config('v2board.epay_name', 'Thanh toán trực tuyến '),
                     'epay_enable' => (int)config('v2board.epay_enable', 0),
                     'epay_url' => config('v2board.epay_url'),
                     'epay_pid' => config('v2board.epay_pid'),
@@ -194,17 +194,17 @@ class ConfigController extends Controller
         $array = \Config::get('v2board');
         foreach ($data as $k => $v) {
             if (!in_array($k, array_keys($request->validated()))) {
-                abort(500, '参数' . $k . '不在规则内，禁止修改');
+                abort(500, 'Tham số ' . $k . 'Không có trong quy tắc, không được phép sửa đổi ');
             }
             $array[$k] = $v;
         }
         $data = var_export($array, 1);
         if (!\File::put(base_path() . '/config/v2board.php', "<?php\n return $data ;")) {
-            abort(500, '修改失败');
+            abort(500, 'Không thể chỉnh sửa ');
         }
         if (function_exists('opcache_reset')) {
             if (opcache_reset() === false) {
-                abort(500, '缓存清除失败，请卸载或检查opcache配置状态');
+                abort(500, 'Xóa bộ nhớ cache không thành công, vui lòng gỡ cài đặt hoặc kiểm tra trạng thái cấu hình opcache ');
             }
         }
         \Artisan::call('config:cache');
