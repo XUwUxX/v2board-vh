@@ -20,7 +20,7 @@ class UserController extends Controller
     public function resetSecret(Request $request)
     {
         $user = User::find($request->input('id'));
-        if (!$user) abort(500, '用户不存在');
+        if (!$user) abort(500, 'Người dùng không tồn tại ');
         $user->token = Helper::guid();
         $user->uuid = Helper::guid(true);
         return response([
@@ -33,7 +33,7 @@ class UserController extends Controller
         $filters = $request->input('filter');
         if ($filters) {
             foreach ($filters as $k => $filter) {
-                if ($filter['condition'] === '模糊') {
+                if ($filter['condition'] === 'Mờ nhạt') {
                     $filter['condition'] = 'like';
                     $filter['value'] = "%{$filter['value']}%";
                 }
@@ -85,7 +85,7 @@ class UserController extends Controller
     public function getUserInfoById(Request $request)
     {
         if (empty($request->input('id'))) {
-            abort(500, '参数错误');
+            abort(500, 'Lỗi tham số ');
         }
         $user = User::find($request->input('id'));
         if ($user->invite_user_id) {
@@ -101,10 +101,10 @@ class UserController extends Controller
         $params = $request->validated();
         $user = User::find($request->input('id'));
         if (!$user) {
-            abort(500, '用户不存在');
+            abort(500, 'Người dùng không tồn tại ');
         }
         if (User::where('email', $params['email'])->first() && $user->email !== $params['email']) {
-            abort(500, '邮箱已被使用');
+            abort(500, 'Email đã được sử dụng ');
         }
         if (isset($params['password'])) {
             $params['password'] = password_hash($params['password'], PASSWORD_DEFAULT);
@@ -115,7 +115,7 @@ class UserController extends Controller
         if (isset($params['plan_id'])) {
             $plan = Plan::find($params['plan_id']);
             if (!$plan) {
-                abort(500, '订阅计划不存在');
+                abort(500, 'Gói đăng ký không tồn tại ');
             }
             $params['group_id'] = $plan->group_id;
         }
@@ -131,7 +131,7 @@ class UserController extends Controller
         try {
             $user->update($params);
         } catch (\Exception $e) {
-            abort(500, '保存失败');
+            abort(500, 'Lưu thất bại ');
         }
         return response([
             'data' => true
@@ -152,10 +152,10 @@ class UserController extends Controller
             }
         }
 
-        $data = "邮箱,余额,推广佣金,总流量,剩余流量,套餐到期时间,订阅计划,订阅地址\r\n";
+        $data = "Email, Số dư, Hoa hồng khuyến mại, Tổng lưu lượng truy cập, Lưu lượng còn lại, Thời gian hết hạn gói, Gói đăng ký, Địa chỉ đăng ký \r\n";
         $baseUrl = config('v2board.subscribe_url', config('v2board.app_url', env('APP_URL')));
         foreach($res as $user) {
-            $expireDate = $user['expired_at'] === NULL ? '长期有效' : date('Y-m-d H:i:s', $user['expired_at']);
+            $expireDate = $user['expired_at'] === NULL ? 'Hiệu quả lâu dài ' : date('Y-m-d H:i:s', $user['expired_at']);
             $balance = $user['balance'] / 100;
             $commissionBalance = $user['commission_balance'] / 100;
             $transferEnable = $user['transfer_enable'] ? $user['transfer_enable'] / 1073741824 : 0;
@@ -173,7 +173,7 @@ class UserController extends Controller
             if ($request->input('plan_id')) {
                 $plan = Plan::find($request->input('plan_id'));
                 if (!$plan) {
-                    abort(500, '订阅计划不存在');
+                    abort(500, 'Gói đăng ký không tồn tại ');
                 }
             }
             $user = [
@@ -186,11 +186,11 @@ class UserController extends Controller
                 'token' => Helper::guid()
             ];
             if (User::where('email', $user['email'])->first()) {
-                abort(500, '邮箱已存在于系统中');
+                abort(500, 'Hộp thư đã tồn tại trong hệ thống ');
             }
             $user['password'] = password_hash($request->input('password') ?? $user['email'], PASSWORD_DEFAULT);
             if (!User::create($user)) {
-                abort(500, '生成失败');
+                abort(500, 'Thiết lập thất bại ');
             }
             return response([
                 'data' => true
@@ -206,7 +206,7 @@ class UserController extends Controller
         if ($request->input('plan_id')) {
             $plan = Plan::find($request->input('plan_id'));
             if (!$plan) {
-                abort(500, '订阅计划不存在');
+                abort(500, 'Gói đăng ký không tồn tại ');
             }
         }
         $users = [];
@@ -228,13 +228,13 @@ class UserController extends Controller
         DB::beginTransaction();
         if (!User::insert($users)) {
             DB::rollBack();
-            abort(500, '生成失败');
+            abort(500, 'Thiết lập thất bại ');
         }
         DB::commit();
-        $data = "账号,密码,过期时间,UUID,创建时间,订阅地址\r\n";
+        $data = "Tài khoản, Mật khẩu, Thời gian hết hạn, UUID, Thời gian tạo, Địa chỉ đăng ký \r\n";
         $baseUrl = config('v2board.subscribe_url', config('v2board.app_url', env('APP_URL')));
         foreach($users as $user) {
-            $expireDate = $user['expired_at'] === NULL ? '长期有效' : date('Y-m-d H:i:s', $user['expired_at']);
+            $expireDate = $user['expired_at'] === NULL ? 'Hiệu quả lâu dài ' : date('Y-m-d H:i:s', $user['expired_at']);
             $createDate = date('Y-m-d H:i:s', $user['created_at']);
             $password = $request->input('password') ?? $user['email'];
             $subscribeUrl = $baseUrl . '/api/v1/client/subscribe?token=' . $user['token'];
@@ -280,7 +280,7 @@ class UserController extends Controller
                 'banned' => 1
             ]);
         } catch (\Exception $e) {
-            abort(500, '处理失败');
+            abort(500, 'Xử lý không thành công ');
         }
 
         return response([
