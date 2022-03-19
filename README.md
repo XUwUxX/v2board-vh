@@ -10,7 +10,7 @@
 
 ## Link cài đặt ^^
 ```
-git cgit clone https://github.com/XUwUxX/v2board-vh.git ./
+git clone https://github.com/XUwUxX/v2board-vh.git ./
 ```
 ## Demo
 [Link Demo](https://v2board.com)
@@ -20,8 +20,15 @@ git cgit clone https://github.com/XUwUxX/v2board-vh.git ./
 
 ## Donation :33
 - Donate gửi qua Telegram nha :@lisa_is_me
-
-
+c Link donate : https://t.me/lisa_is_me
+>
+>  _     ___ ____    _    
+ | |   |_ _/ ___|  / \   
+ | |    | |\___ \ / _ \  
+ | |___ | | ___) / ___ \ 
+ |_____|___|____/_/   \_\
+                         
+>
 [![Donate gửi qua Telegram nha :@lisa_is_me](https://i.pinimg.com/236x/7e/d4/2e/7ed42e877715c9e9ef4df08939d49565.jpg)
 
 ## Cảm tạ
