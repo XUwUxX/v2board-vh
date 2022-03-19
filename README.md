@@ -23,7 +23,7 @@ git clone https://github.com/XUwUxX/v2board-vh.git ./
 
 Tập lệnh gắn một cú nhấp chuột của trình docker phụ trợ XrayR
 
-c Link donate : https://t.me/lisa_is_me
+> Link donate : https://t.me/lisa_is_me
 >
 > Đây là mã nguồn mở vui lòng không lạm dụng quá mức
 >
