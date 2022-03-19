@@ -33,15 +33,15 @@ class CouponController extends Controller
     public function show(Request $request)
     {
         if (empty($request->input('id'))) {
-            abort(500, '参数有误');
+            abort(500, 'Tham số sai ');
         }
         $coupon = Coupon::find($request->input('id'));
         if (!$coupon) {
-            abort(500, '优惠券不存在');
+            abort(500, 'Phiếu giảm giá không tồn tại ');
         }
         $coupon->show = $coupon->show ? 0 : 1;
         if (!$coupon->save()) {
-            abort(500, '保存失败');
+            abort(500, 'Lưu thất bại ');
         }
 
         return response([
@@ -68,7 +68,7 @@ class CouponController extends Controller
             try {
                 Coupon::find($request->input('id'))->update($params);
             } catch (\Exception $e) {
-                abort(500, '保存失败');
+                abort(500, 'Lưu thất bại ');
             }
         }
 
@@ -90,18 +90,18 @@ class CouponController extends Controller
         DB::beginTransaction();
         if (!Coupon::insert($coupons)) {
             DB::rollBack();
-            abort(500, '生成失败');
+            abort(500, 'Thiết lập thất bại ');
         }
         DB::commit();
-        $data = "名称,类型,金额或比例,开始时间,结束时间,可用次数,可用于订阅,券码,生成时间\r\n";
+        $data = "Tên, Loại, Số lượng hoặc Tỷ lệ, Thời gian bắt đầu, Thời gian kết thúc, Thời gian có sẵn, Có sẵn để đăng ký, Mã phiếu giảm giá, Thời gian đã tạo \r\n";
         foreach($coupons as $coupon) {
-            $type = ['', '金额', '比例'][$coupon['type']];
+            $type = ['', 'số lượng ', 'Tỷ lệ '][$coupon['type']];
             $value = ['', ($coupon['value'] / 100),$coupon['value']][$coupon['type']];
             $startTime = date('Y-m-d H:i:s', $coupon['started_at']);
             $endTime = date('Y-m-d H:i:s', $coupon['ended_at']);
-            $limitUse = $coupon['limit_use'] ?? '不限制';
+            $limitUse = $coupon['limit_use'] ?? 'không giới hạn ';
             $createTime = date('Y-m-d H:i:s', $coupon['created_at']);
-            $limitPlanIds = isset($coupon['limit_plan_ids']) ? implode("/", $coupon['limit_plan_ids']) : '不限制';
+            $limitPlanIds = isset($coupon['limit_plan_ids']) ? implode("/", $coupon['limit_plan_ids']) : 'không giới hạn ';
             $data .= "{$coupon['name']},{$type},{$value},{$startTime},{$endTime},{$limitUse},{$limitPlanIds},{$coupon['code']},{$createTime}\r\n";
         }
         echo $data;
@@ -110,14 +110,14 @@ class CouponController extends Controller
     public function drop(Request $request)
     {
         if (empty($request->input('id'))) {
-            abort(500, '参数有误');
+            abort(500, 'Tham số sai ');
         }
         $coupon = Coupon::find($request->input('id'));
         if (!$coupon) {
-            abort(500, '优惠券不存在');
+            abort(500, 'Phiếu giảm giá không tồn tại ');
         }
         if (!$coupon->delete()) {
-            abort(500, '删除失败');
+            abort(500, 'Không xóa được ');
         }
 
         return response([
