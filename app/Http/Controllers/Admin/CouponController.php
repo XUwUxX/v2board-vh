@@ -62,7 +62,7 @@ class CouponController extends Controller
                 $params['code'] = Helper::randomChar(8);
             }
             if (!Coupon::create($params)) {
-                abort(500, '创建失败');
+                abort(500, 'Không tạo được ');
             }
         } else {
             try {
