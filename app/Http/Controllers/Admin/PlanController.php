@@ -46,7 +46,7 @@ class PlanController extends Controller
         if ($request->input('id')) {
             $plan = Plan::find($request->input('id'));
             if (!$plan) {
-                abort(500, '该订阅不存在');
+                abort(500, 'Đăng ký không tồn tại ');
             }
             DB::beginTransaction();
             // update user group id and transfer
@@ -58,7 +58,7 @@ class PlanController extends Controller
                 $plan->update($params);
             } catch (\Exception $e) {
                 DB::rollBack();
-                abort(500, '保存失败');
+                abort(500, 'Lưu thất bại ');
             }
             DB::commit();
             return response([
@@ -66,7 +66,7 @@ class PlanController extends Controller
             ]);
         }
         if (!Plan::create($params)) {
-            abort(500, '创建失败');
+            abort(500, 'Không tạo được ');
         }
         return response([
             'data' => true
@@ -76,15 +76,15 @@ class PlanController extends Controller
     public function drop(Request $request)
     {
         if (Order::where('plan_id', $request->input('id'))->first()) {
-            abort(500, '该订阅下存在订单无法删除');
+            abort(500, 'Có đơn đặt hàng theo đăng ký này và không thể bị xóa ');
         }
         if (User::where('plan_id', $request->input('id'))->first()) {
-            abort(500, '该订阅下存在用户无法删除');
+            abort(500, 'Có những người dùng theo đăng ký này không thể bị xóa ');
         }
         if ($request->input('id')) {
             $plan = Plan::find($request->input('id'));
             if (!$plan) {
-                abort(500, '该订阅ID不存在');
+                abort(500, 'ID đăng ký không tồn tại ');
             }
         }
         return response([
@@ -101,13 +101,13 @@ class PlanController extends Controller
 
         $plan = Plan::find($request->input('id'));
         if (!$plan) {
-            abort(500, '该订阅不存在');
+            abort(500, 'Đăng ký không tồn tại ');
         }
 
         try {
             $plan->update($updateData);
         } catch (\Exception $e) {
-            abort(500, '保存失败');
+            abort(500, 'Lưu thất bại ');
         }
 
         return response([
@@ -121,7 +121,7 @@ class PlanController extends Controller
         foreach ($request->input('plan_ids') as $k => $v) {
             if (!Plan::find($v)->update(['sort' => $k + 1])) {
                 DB::rollBack();
-                abort(500, '保存失败');
+                abort(500, 'Lưu thất bại ');
             }
         }
         DB::commit();
