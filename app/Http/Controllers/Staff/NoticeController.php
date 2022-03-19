@@ -26,13 +26,13 @@ class NoticeController extends Controller
         ]);
         if (!$request->input('id')) {
             if (!Notice::create($data)) {
-                abort(500, '保存失败');
+                abort(500, 'Lưu thất bại ');
             }
         } else {
             try {
                 Notice::find($request->input('id'))->update($data);
             } catch (\Exception $e) {
-                abort(500, '保存失败');
+                abort(500, 'Lưu thất bại ');
             }
         }
         return response([
@@ -43,14 +43,14 @@ class NoticeController extends Controller
     public function drop(Request $request)
     {
         if (empty($request->input('id'))) {
-            abort(500, '参数错误');
+            abort(500, 'Lỗi tham số ');
         }
         $notice = Notice::find($request->input('id'));
         if (!$notice) {
-            abort(500, '公告不存在');
+            abort(500, 'Thông báo không tồn tại ');
         }
         if (!$notice->delete()) {
-            abort(500, '删除失败');
+            abort(500, 'không xóa được ');
         }
         return response([
             'data' => true
