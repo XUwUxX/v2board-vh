@@ -49,15 +49,15 @@ class PaymentController extends Controller
     public function save(Request $request)
     {
         if (!config('v2board.app_url')) {
-            abort(500, '请在站点配置中配置站点地址');
+            abort(500, 'Vui lòng định cấu hình địa chỉ trang web trong cấu hình trang web ');
         }
         if ($request->input('id')) {
             $payment = Payment::find($request->input('id'));
-            if (!$payment) abort(500, '支付方式不存在');
+            if (!$payment) abort(500, 'Phương thức thanh toán không tồn tại ');
             try {
                 $payment->update($request->input());
             } catch (\Exception $e) {
-                abort(500, '更新失败');
+                abort(500, 'Cập nhật không thành công ');
             }
             return response([
                 'data' => true
@@ -70,14 +70,14 @@ class PaymentController extends Controller
             'config' => 'required',
             'notify_domain' => 'nullable|url'
         ], [
-            'name.required' => '显示名称不能为空',
-            'payment.required' => '网关参数不能为空',
-            'config.required' => '配置参数不能为空',
-            'notify_domain.url' => '自定义通知域名格式有误'
+            'name.required' => 'Tên hiển thị không được để trống ',
+            'payment.required' => 'Tham số cổng không được để trống ',
+            'config.required' => 'Thông số cấu hình không được để trống ',
+            'notify_domain.url' => 'Định dạng tên miền thông báo tùy chỉnh không chính xác '
         ]);
         $params['uuid'] = Helper::randomChar(8);
         if (!Payment::create($params)) {
-            abort(500, '保存失败');
+            abort(500, 'Lưu thất bại ');
         }
         return response([
             'data' => true
@@ -87,7 +87,7 @@ class PaymentController extends Controller
     public function drop(Request $request)
     {
         $payment = Payment::find($request->input('id'));
-        if (!$payment) abort(500, '支付方式不存在');
+        if (!$payment) abort(500, 'Phương thức thanh toán không tồn tại ');
         return response([
             'data' => $payment->delete()
         ]);
