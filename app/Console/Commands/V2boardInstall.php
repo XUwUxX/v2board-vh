@@ -22,7 +22,7 @@ class V2boardInstall extends Command
      *
      * @var string
      */
-    protected $description = 'Cài đặt V2board';
+    protected $description = 'v2board 安装';
 
     /**
      * Create a new command instance.
@@ -47,16 +47,8 @@ class V2boardInstall extends Command
             $this->info(" \ \ / /  __) |  _ \ / _ \ / _` | '__/ _` | ");
             $this->info("  \ V /  / __/| |_) | (_) | (_| | | | (_| | ");
             $this->info("   \_/  |_____|____/ \___/ \__,_|_|  \__,_| ");
-            $this->info(" Việt hóa bởi @Lisa_is_me");
-            $this->info("Link :https://pn-lisa.gitbook.io/v2board-vh-hd/");
-            $this->info("  _      _____  _____         ");
-            $this->info(" | |    |_   _|/ ____|  /\    ");
-            $this->info(" | |      | | | (___   /  \   ");
-            $this->info(" | |      | |  \___ \ / /\ \  ");
-            $this->info(" | |____ _| |_ ____) / ____ \ ");
-            $this->info(" |______|_____|_____/_/    \_\");
             if (\File::exists(base_path() . '/.env')) {
-                abort(500, 'V2board đã được cài đặt, để cài đặt lại, loại bỏ các tập tin .env trong thư mục');
+                abort(500, 'V2board đã được cài đặt, để cài đặt lại, loại bỏ các tập tin.env trong thư mục');
             }
 
             if (!copy(base_path() . '/.env.example', base_path() . '/.env')) {
