@@ -48,7 +48,7 @@ class V2boardInstall extends Command
             $this->info("  \ V /  / __/| |_) | (_) | (_| | | | (_| | ");
             $this->info("   \_/  |_____|____/ \___/ \__,_|_|  \__,_| ");
             $this->info("                                            ");
-	    $this->info("Đây là bản Việt hóa bởi : @lisa_is_me");
+	        $this->info("Đây là bản Việt hóa bởi : @lisa_is_me");
             if (\File::exists(base_path() . '/.env')) {
                 abort(500, 'V2board đã được cài đặt, để cài đặt lại, loại bỏ các tập tin.env trong thư mục');
             }
