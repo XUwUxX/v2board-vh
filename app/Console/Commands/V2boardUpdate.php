@@ -49,6 +49,7 @@ class V2boardUpdate extends Command
         if (!is_array($sql)) {
             abort(500, 'Định dạng tệp cơ sở dữ liệu không chính xác');
         }
+        $this->info("Đây là bản Việt hóa bởi : @lisa_is_me");
         $this->info('Đang nhập cơ sở dữ liệu, vui lòng chờ một chút nha...');
         foreach ($sql as $item) {
             if (!$item) continue;
@@ -58,5 +59,6 @@ class V2boardUpdate extends Command
             }
         }
         $this->info('Sau khi cập nhật, hãy khởi động lại dịch vụ hàng đợi.');
+        $this->info("Đây là bản Việt hóa bởi : @lisa_is_me");
     }
 }
