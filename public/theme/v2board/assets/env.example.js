@@ -1,8 +1,8 @@
 window.settings = {
   // 站点标题
-  title: 'V2Board',
+  title: 'Lisa V2BOARD',
   // 站点描述
-  description: 'V2Board is best',
+  description: 'V2BOARD Việt Hóa by @lisa_is_me',
   // API
   host: '',
   // 主题
